@@ -86,7 +86,7 @@
 
    4. Khởi tạo CSDL (chọn **một** trong hai cách)
 
-   - Cách A — **EF Core Migration** *(khuyến nghị)*
+	- Cách A — **EF Core Migration** *(khuyến nghị)*
 
 	**Visual Studio → Tools → NuGet Package Manager → Package Manager Console (PMC)**, chọn đúng project `SRC` làm *Default Project*, rồi:
  
@@ -102,7 +102,7 @@
 
      > Nếu *đã có* thư mục **Migrations/** trong source, có thể bỏ `Add-Migration` và chạy thẳng `Update-Database`.
 
-    - Cách B — **Restore từ file .bak**
+	- Cách B — **Restore từ file .bak**
 
      a. Mở **SSMS** → kết nối tới `((localdb)\MSSQLLocalDB)` hoặc instance của bạn.
 
