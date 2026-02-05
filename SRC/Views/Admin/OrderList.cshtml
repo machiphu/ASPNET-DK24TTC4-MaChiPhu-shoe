@@ -1,0 +1,43 @@
+﻿@* DÒNG NÀY QUAN TRỌNG NHẤT: Khai báo View này sẽ nhận một DANH SÁCH đơn hàng *@
+@model IEnumerable<MaChiPhuShoe.Models.Order>
+
+@{
+    ViewData["Title"] = "Quản lý Đơn hàng";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>Danh sách tất cả các đơn hàng đã được đặt trên hệ thống.</p>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Mã ĐH</th>
+                    <th>Khách hàng</th>
+                    <th>Email</th>
+                    <th>Ngày đặt</th>
+                    <th class="text-end">Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td><strong>#@order.Id</strong></td>
+                        <td>@order.CustomerName</td>
+                        <td>@order.User?.Email</td>
+                        <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td class="text-end">@order.TotalAmount.ToString("N0") đ</td>
+                        <td><span class="badge bg-primary">@order.Status</span></td>
+                        <td class="text-center">
+                            <a asp-action="OrderDetail" asp-route-id="@order.Id" class="btn btn-info btn-sm">Xem chi tiết</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

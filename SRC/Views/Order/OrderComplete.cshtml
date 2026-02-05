@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Đặt hàng thành công";
+}
+
+<div class="text-center p-5 border rounded shadow-sm">
+    <i class="fas fa-check-circle fa-5x text-success mb-4"></i>
+    <h1 class="display-4">Đặt hàng thành công !</h1>
+    <p class="lead">Cảm ơn bạn đã mua sắm tại MaChiPhu-Shoe. Đơn hàng của bạn với mã số <strong>#@ViewBag.OrderId</strong> đã được ghi nhận.</p>
+    <p>Chúng tôi sẽ liên hệ với bạn để xác nhận trong thời gian sớm nhất.</p>
+    <hr>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Tiếp tục mua sắm</a>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+}

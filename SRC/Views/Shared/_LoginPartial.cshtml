@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MaChiPhuShoe.Models
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            @* Thêm class "dropdown" vào đây *@
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Hello @UserManager.GetUserName(User) !
+                </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Quản lý tài khoản</a></li>
+                     <li><a class="dropdown-item" asp-controller="Account" asp-action="OrderHistory">Lịch sử đơn hàng</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                     <li>
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="dropdown-item">Logout</button>
+                    </form>
+                </li>
+                </ul>
+            </li>
+            </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                @* Thêm class "text-light" vào đây *@
+                <button type="submit" class="nav-link btn btn-link text-light">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            @* Thêm class "text-light" vào đây *@
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a>
+        </li>
+        <li class="nav-item">
+            @* Thêm class "text-light" vào đây *@
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+        </li>
+    }
+</ul>

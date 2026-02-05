@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MaChiPhuShoe.Models.Order>
+
+@{
+    ViewData["Title"] = "Lịch sử đơn hàng";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Any())
+{
+    @foreach (var order in Model)
+    {
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-light d-flex justify-content-between">
+                <div>
+                    <strong>Mã đơn hàng: #@order.Id</strong>
+                    <span class="ms-3 text-muted">Ngày đặt: @order.OrderDate.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div>
+                    Trạng thái: <span class="badge bg-success">@order.Status</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tbody>
+                        @foreach (var detail in order.OrderDetails)
+                        {
+                            <tr>
+                                <td style="width: 10%;">
+                                    <img src="@detail.Product.ImageUrl" class="img-fluid rounded" />
+                                </td>
+                                <td>
+                                    @detail.Product.Name <br />
+                                    <small class="text-muted">Số lượng: @detail.Quantity</small>
+                                </td>
+                                <td class="text-end">@detail.Price.ToString("N0") đ</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-end">
+                <strong>Tổng cộng: <span class="text-danger">@order.TotalAmount.ToString("N0") đ</span></strong>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>Bạn chưa có đơn hàng nào.</p>
+}

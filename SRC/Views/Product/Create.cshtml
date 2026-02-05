@@ -1,0 +1,55 @@
+﻿@model MaChiPhuShoe.Models.Product
+
+@{
+    ViewData["Title"] = "Thêm sản phẩm mới";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        @* THÔNG TIN CƠ BẢN *@
+        <div class="col-md-6">
+            <h4>Thông tin cơ bản</h4>
+            <div class="form-group mb-3"><label asp-for="Name"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="Price"></label><input asp-for="Price" class="form-control" /><span asp-validation-for="Price" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="OldPrice"></label><input asp-for="OldPrice" class="form-control" /><span asp-validation-for="OldPrice" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="ImageUrl"></label><input asp-for="ImageUrl" class="form-control" /><span asp-validation-for="ImageUrl" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="ProductState"></label><input asp-for="ProductState" class="form-control" /><span asp-validation-for="ProductState" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="StockStatus"></label><input asp-for="StockStatus" class="form-control" /><span asp-validation-for="StockStatus" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="Warranty"></label><input asp-for="Warranty" class="form-control" /><span asp-validation-for="Warranty" class="text-danger"></span></div>
+        </div>
+
+        @* THÔNG SỐ KỸ THUẬT *@
+        <div class="col-md-6">
+            <h4>Thông số kỹ thuật</h4>
+            @* <div class="form-group mb-3"><label asp-for="Cpu" class="fw-bold"></label><input asp-for="Cpu" class="form-control" /><span asp-validation-for="Cpu" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="CpuDetail"></label><textarea asp-for="CpuDetail" class="form-control" rows="3"></textarea><span asp-validation-for="CpuDetail" class="text-danger"></span></div>
+            <hr />
+            <div class="form-group mb-3"><label asp-for="Ram" class="fw-bold"></label><input asp-for="Ram" class="form-control" /><span asp-validation-for="Ram" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="RamDetail"></label><textarea asp-for="RamDetail" class="form-control" rows="3"></textarea><span asp-validation-for="RamDetail" class="text-danger"></span></div>
+            <hr />
+            <div class="form-group mb-3"><label asp-for="Storage" class="fw-bold"></label><input asp-for="Storage" class="form-control" /><span asp-validation-for="Storage" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="StorageDetail"></label><textarea asp-for="StorageDetail" class="form-control" rows="3"></textarea><span asp-validation-for="StorageDetail" class="text-danger"></span></div>
+            <hr />
+            <div class="form-group mb-3"><label asp-for="Screen" class="fw-bold"></label><input asp-for="Screen" class="form-control" /><span asp-validation-for="Screen" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="ScreenDetail"></label><textarea asp-for="ScreenDetail" class="form-control" rows="3"></textarea><span asp-validation-for="ScreenDetail" class="text-danger"></span></div>
+            <hr />
+            <div class="form-group mb-3"><label asp-for="GpuDetail"></label><input asp-for="GpuDetail" class="form-control" /><span asp-validation-for="GpuDetail" class="text-danger"></span></div>
+            <div class="form-group mb-3"><label asp-for="OperatingSystemDetail"></label><input asp-for="OperatingSystemDetail" class="form-control" /><span asp-validation-for="OperatingSystemDetail" class="text-danger"></span></div> *@
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <input type="submit" value="Tạo mới" class="btn btn-primary" />
+    </div>
+    <div class="mt-3">
+        <a asp-action="Index">Quay lại danh sách</a>
+    </div>
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label">Danh mục</label>
+        <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-select"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+</form>

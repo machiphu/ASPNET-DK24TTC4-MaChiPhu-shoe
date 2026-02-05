@@ -1,0 +1,79 @@
+﻿@model MaChiPhuShoe.Models.Order
+
+@{
+    ViewData["Title"] = "Chi tiết Đơn hàng #" + Model.Id;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>@ViewData["Title"]</h1>
+    @* NÚT QUAY LẠI DANH SÁCH ĐÃ ĐƯỢC THÊM VÀO ĐÂY *@
+    <a asp-action="OrderList" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+    </a>
+</div>
+<hr />
+
+<div class="row">
+    @* Cột bên trái chứa thông tin chi tiết đơn hàng *@
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-header">Các sản phẩm trong đơn</div>
+            <div class="card-body">
+                <table class="table">
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        <tr>
+                            <td style="width: 80px;">
+                                <img src="@item.Product.ImageUrl" class="img-fluid rounded" />
+                            </td>
+                            <td>
+                                <strong>@item.Product.Name</strong> <br />
+                                <small class="text-muted">Số lượng: @item.Quantity</small>
+                            </td>
+                            <td class="text-end">@item.Price.ToString("N0") đ</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @* Cột bên phải chứa thông tin khách hàng và form cập nhật *@
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <div class="card-header">Thông tin khách hàng</div>
+            <div class="card-body">
+                <p><strong>Tên:</strong> @Model.CustomerName</p>
+                <p><strong>Địa chỉ:</strong> @Model.ShippingAddress</p>
+                <p><strong>SĐT:</strong> @Model.PhoneNumber</p>
+                <p><strong>Email:</strong> @Model.User?.Email</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header fw-bold">Xử lý Đơn hàng</div>
+            <div class="card-body">
+                <p>
+                    <strong>Trạng thái hiện tại:</strong>
+                    <span class="badge bg-primary fs-6">@Model.Status</span>
+                </p>
+                <hr />
+                <form asp-action="UpdateStatus" method="post">
+                    <input type="hidden" name="orderId" value="@Model.Id" />
+                    <div class="form-group mb-2">
+                        <label for="status" class="form-label">Thay đổi trạng thái:</label>
+                        <select name="status" class="form-select">
+                            <option value="Đang xử lý">Đang xử lý</option>
+                            <option value="Đã xác nhận">Đã xác nhận</option>
+                            <option value="Đang giao hàng">Đang giao hàng</option>
+                            <option value="Đã hoàn thành">Đã hoàn thành</option>
+                            <option value="Đã hủy">Đã hủy</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="fas fa-save"></i> Cập nhật
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

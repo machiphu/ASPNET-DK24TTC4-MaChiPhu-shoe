@@ -1,0 +1,49 @@
+﻿@* DÒNG NÀY QUAN TRỌNG NHẤT: Khai báo View này sẽ nhận một DANH SÁCH sản phẩm *@
+@model IEnumerable<MaChiPhuShoe.Models.Product>
+
+@{
+    ViewData["Title"] = "Quản lý sản phẩm";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>@ViewData["Title"]</h1>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Thêm sản phẩm mới
+    </a>
+</div>
+
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>CPU</th>
+                    <th class="text-end">Giá bán</th>
+                    <th class="text-center" style="width: 150px;">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* Dùng vòng lặp để duyệt qua từng sản phẩm trong danh sách *@
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>@item.Name</strong></td>
+                        @* <td>@item.Cpu</td> *@
+                        <td class="text-end">@item.Price.ToString("N0") đ</td>
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Sửa</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@* Để sử dụng được icon, chúng ta cần thêm link đến Font Awesome *@
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+}

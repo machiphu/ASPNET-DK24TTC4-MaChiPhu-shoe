@@ -1,0 +1,89 @@
+﻿@model List<MaChiPhuShoe.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Giỏ hàng của bạn";
+    decimal total = 0;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-end">Giá</th>
+                        <th class="text-end">Tổng cộng</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        total += item.Total;
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="@item.ImageUrl" width="80" class="me-3 rounded shadow-sm" />
+                                    <span>@item.ProductName</span>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                @* KHU VỰC TĂNG GIẢM SỐ LƯỢNG *@
+                                <div class="input-group" style="width: 100px; margin: auto;">
+                                    <a asp-action="RemoveOne" asp-route-productId="@item.ProductId" class="btn btn-outline-secondary">-</a>
+                                    <input type="text" value="@item.Quantity" class="form-control text-center" readonly />
+                                    <a asp-action="AddOne" asp-route-productId="@item.ProductId" class="btn btn-outline-secondary">+</a>
+                                </div>
+                            </td>
+                            <td class="text-end">@item.Price.ToString("N0") đ</td>
+                            <td class="text-end fw-bold">@item.Total.ToString("N0") đ</td>
+                            <td>
+                                @* NÚT XÓA SẢN PHẨM *@
+                                <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">TÓM TẮT ĐƠN HÀNG</h5>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tổng tiền hàng</span>
+                        <strong>@total.ToString("N0") đ</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Phí vận chuyển</span>
+                        <strong>Miễn phí</strong>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>TỔNG CỘNG</span>
+                        <strong class="text-danger">@total.ToString("N0") đ</strong>
+                    </div>
+                    <div class="d-grid mt-3">
+                        <a asp-controller="Order" asp-action="Checkout" class="btn btn-danger">TIẾN HÀNH THANH TOÁN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center p-5 border rounded">
+        <h4>Giỏ hàng của bạn đang trống</h4>
+        <p class="text-muted">Hãy quay lại cửa hàng để chọn những sản phẩm tuyệt vời nhé!</p>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-2">Tiếp tục mua sắm</a>
+    </div>
+}

@@ -1,0 +1,30 @@
+﻿@model MaChiPhuShoe.Models.Product
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+}
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <img src="@(!string.IsNullOrWhiteSpace(Model.ImageUrl) ? Model.ImageUrl : Url.Content("~/images/no-image.png"))"
+                 alt="@Model.Name" class="img-fluid rounded border p-3" />
+        </div>
+        <div class="col-md-6">
+            <h3 class="fw-bold mb-3">@Model.Name</h3>
+            <p class="h4 text-danger fw-bold mb-3">@Model.Price.ToString("N0") đ</p>
+
+            <ul class="list-unstyled mb-4">
+                @* <li><strong>CPU:</strong> @Model.Cpu</li>
+                <li><strong>RAM:</strong> @Model.Ram</li>
+                <li><strong>Ổ cứng:</strong> @Model.Storage</li>
+                <li><strong>Màn hình:</strong> @Model.Screen</li>
+                <li><strong>Bảo hành:</strong> @Model.Warranty</li> *@
+            </ul>
+
+            <a class="btn btn-primary me-2"
+               asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@Model.Id">
+                <i class="fas fa-cart-plus me-1"></i> Thêm vào giỏ
+            </a>
+            <a class="btn btn-outline-secondary" asp-controller="SanPham" asp-action="Index">Quay lại</a>
+        </div>
+    </div>
+</div>

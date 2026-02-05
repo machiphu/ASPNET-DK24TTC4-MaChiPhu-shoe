@@ -1,0 +1,79 @@
+﻿@using MaChiPhuShoe.Controllers
+@model IEnumerable<UserRow>
+@{
+    ViewData["Title"] = "Quản lý User";
+}
+
+<h3 class="mb-3">@ViewData["Title"]</h3>
+
+@if (TempData["Ok"] != null)
+{
+    <div class="alert alert-success">@TempData["Ok"]</div>
+}
+@if (TempData["Err"] != null)
+{
+    <div class="alert alert-danger">@TempData["Err"]</div>
+}
+
+<form class="row g-2 mb-3" method="get">
+    <div class="col-auto">
+        <input class="form-control" type="text" name="q" value="@(ViewBag.Q ?? "")" placeholder="Tìm kiếm...">
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary">Tìm</button>
+        <a asp-action="Index" class="btn btn-secondary">Xóa lọc</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-light">
+        <tr>
+            <th>Id</th>
+            <th>Tài khoản</th>
+            <th>Email</th>
+            <th>Xác minh</th>
+            <th>Khóa đến</th>
+            <th class="text-end">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td class="text-muted" style="max-width:160px;word-break:break-all">@u.Id</td>
+                <td>@u.UserName</td>
+                <td>@u.Email</td>
+                <td>@(u.EmailConfirmed ? "✔" : "✖")</td>
+                <td>@(u.LockoutEnd?.ToLocalTime().ToString("dd/MM/yyyy HH:mm") ?? "-")</td>
+                <td class="text-end">
+                    <form asp-action="MakeAdmin" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@u.Id" />
+                        <button class="btn btn-sm btn-outline-primary">Cấp Admin</button>
+                    </form>
+                    <form asp-action="RemoveAdmin" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@u.Id" />
+                        <button class="btn btn-sm btn-outline-warning">Gỡ Admin</button>
+                    </form>
+                    @if (u.LockoutEnd == null || u.LockoutEnd <= DateTimeOffset.UtcNow)
+                    {
+                        <form asp-action="Lock" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@u.Id" />
+                            <button class="btn btn-sm btn-outline-danger">Khóa 7 ngày</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="Unlock" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@u.Id" />
+                            <button class="btn btn-sm btn-outline-success">Mở khóa</button>
+                        </form>
+                    }
+                    <form asp-action="Delete" method="post" class="d-inline" onsubmit="return confirm('Xóa user này?')">
+                        <input type="hidden" name="id" value="@u.Id" />
+                        <button class="btn btn-sm btn-danger">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

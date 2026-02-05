@@ -1,8 +1,195 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<MaChiPhuShoe.Models.Product>
+
+@{
+    ViewData["Title"] = "Trang chủ";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Hero Section -->
+<section class="hero-section text-white py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- Bên trái -->
+            <div class="col-md-6">
+                <h1 class="display-5 fw-bold mb-3">
+                    Chào mừng đến với<br /><span class="text-warning">MaChiPhu-Shoe</span>
+                </h1>
+                <p class="lead mb-4">
+                    Shop giày dép uy tín với đa dạng sản phẩm chất lượng cao, nhiều ưu đãi hấp dẫn.
+                </p>
+                <a asp-controller="SanPham" asp-action="Index" class="btn btn-warning btn-lg">
+                    Xem sản phẩm
+                </a>
+            </div>
+
+            <!-- Bên phải: slide khuyến mãi -->
+            <div class="col-md-6 mt-4 mt-md-0">
+                <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="p-4 bg-warning text-dark rounded shadow">
+                                <h4 class="fw-bold">🔥 Combo "Mua càng nhiều, giảm càng sâu"</h4>
+                                <p>Mua 1 đôi: Giảm 5%</p>
+                                <p>Mua đôi thứ 2: Giảm 20% cho đôi thứ hai</p>
+                                <p>Mua đôi thứ 3: Giảm 50% cho đôi thứ ba (hoặc tặng kèm)</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="p-4 bg-info text-white rounded shadow">
+                                <h4 class="fw-bold">🎁 Gói quà tặng kèm (Bundle)</h4>
+                                <p>Mua giày tặng ngay 1 bộ vệ sinh giày chuyên dụng hoặc 2 đôi tất khử mùi</p>
+                                <p>"Combo đi làm": Giày Tây + Thắt lưng da với mức giá ưu đãi hơn mua lẻ 15%</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="p-4 bg-success text-white rounded shadow">
+                                <h4 class="fw-bold">⚡ Đồng giá (Flash Sale)</h4>
+                                <p>"Đồng giá từ 199k - 299k - 399k" cho các mẫu lẻ size</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="p-4 bg-success text-white rounded shadow">
+                                <h4 class="fw-bold">🔥 Giờ vàng giá sốc</h4>
+                                <p>Chỉ giảm giá 30-50% trong khung giờ 12h - 13h hoặc 20h - 21h hàng ngày</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="p-4 bg-success text-white rounded shadow">
+                                <h4 class="fw-bold">🎁 Đổi giày cũ lấy giày mới</h4>
+                                <p>Khách mang giày cũ bất kỳ đến sẽ được trợ giá 100k - 200k khi mua giày mới.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Danh sách sản phẩm -->
+<div class="container mb-5">
+    <h2 class="fw-bold text-center mb-4">Sản phẩm nổi bật</h2>
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 shadow-sm product-card">
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">
+                        <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name"
+                             style="height:200px; object-fit:contain; padding:10px;">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id"
+                               class="text-dark text-decoration-none">@product.Name</a>
+                        </h5>
+
+                        <ul class="list-unstyled text-muted small mb-3">
+                           @*  <li><strong>CPU:</strong> @product.Cpu</li>
+                            <li><strong>RAM:</strong> @product.Ram</li>
+                            <li><strong>Ổ cứng:</strong> @product.Storage</li>
+                            <li><strong>Màn hình:</strong> @product.Screen</li> *@
+                        </ul>
+
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <p class="h5 text-danger fw-bold mb-0">@product.Price.ToString("N0") đ</p>
+                            <div>
+                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.Id"
+                                   class="btn btn-outline-danger btn-sm" title="Thêm vào giỏ">
+                                    <i class="fas fa-cart-plus"></i>
+                                </a>
+                                <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id"
+                                   class="btn btn-danger btn-sm">Chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
+<!-- Features Section -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-shipping-fast fa-3x text-danger mb-3"></i>
+                <h5>Giao hàng hỏa tốc</h5>
+                <p class="text-muted">Giao hàng toàn quốc trong 24-48 giờ</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-shield-alt fa-3x text-danger mb-3"></i>
+                <h5>Bảo hành chính hãng</h5>
+                <p class="text-muted">Chính sách bảo hành minh bạch và uy tín</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-headset fa-3x text-danger mb-3"></i>
+                <h5>Hỗ trợ 24/7</h5>
+                <p class="text-muted">Đội ngũ tư vấn chuyên nghiệp, tận tâm</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CSS tùy chỉnh -->
+<style>
+    .hero-section {
+        background: url('https://iili.io/ftG5Fmg.png') no-repeat center center;
+        background-size: cover;
+        position: relative;
+    }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.55);
+        }
+
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+    .product-card {
+        transition: transform .2s ease-in-out;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            transition: transform .2s ease-in-out;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+    .carousel-item {
+        height: 205px !important;
+    }
+
+    .rounded{
+        height: 200px !important;
+    }
+    
+    .card{
+        background-color: #f2f2f2 !important;
+    }
+    h5{
+        line-height: 1.05 !important;
+    }
+</style>

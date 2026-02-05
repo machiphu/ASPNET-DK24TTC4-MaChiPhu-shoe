@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MaChiPhuShoe.Models.Order>
+
+@{
+    ViewData["Title"] = "Báo cáo Thống kê";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@* BỘ LỌC NGÀY *@
+<form method="get" class="row g-3 align-items-center my-3 p-3 bg-light border rounded">
+    <div class="col-auto">
+        <label>Từ ngày</label>
+        <input type="date" name="startDate" class="form-control" value="@ViewBag.StartDate" />
+    </div>
+    <div class="col-auto">
+        <label>Đến ngày</label>
+        <input type="date" name="endDate" class="form-control" value="@ViewBag.EndDate" />
+    </div>
+    <div class="col-auto mt-4">
+        <button type="submit" class="btn btn-primary">Xem báo cáo</button>
+    </div>
+</form>
+
+@* CÁC THẺ TÓM TẮT *@
+<div class="row">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">DOANH THU TRONG KỲ</div>
+            <div class="card-body">
+                <h5 class="card-title">@(((decimal)ViewBag.TotalRevenue).ToString("N0")) đ</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">ĐƠN HÀNG TRONG KỲ</div>
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.TotalOrders</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">TỔNG SẢN PHẨM</div>
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.TotalProducts</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">TỔNG KHÁCH HÀNG</div>
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.TotalUsers</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* LƯỚI CHI TIẾT *@
+<div class="card mt-3">
+    <div class="card-header">
+        Chi tiết đơn hàng trong kỳ
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Mã ĐH</th>
+                    <th>Khách hàng</th>
+                    <th>Ngày đặt</th>
+                    <th class="text-end">Tổng tiền</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.CustomerName</td>
+                        <td>@order.OrderDate.ToString("g")</td>
+                        <td class="text-end">@order.TotalAmount.ToString("N0") đ</td>
+                        <td>@order.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

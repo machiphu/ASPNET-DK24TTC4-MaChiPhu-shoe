@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MaChiPhuShoe.Models.Category>
+
+<ul class="dropdown-menu">
+    @foreach (var cat in Model)
+    {
+        <li>
+            <a class="dropdown-item"
+               asp-controller="SanPham"
+               asp-action="Index"
+               asp-route-category="@cat.Id">
+                @cat.Name
+            </a>
+        </li>
+    }
+</ul>
