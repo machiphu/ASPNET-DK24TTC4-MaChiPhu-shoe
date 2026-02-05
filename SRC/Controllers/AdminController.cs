@@ -29,7 +29,7 @@ namespace MaChiPhuShoe.Controllers
 
             // Lọc các đơn hàng trong khoảng thời gian đã chọn
             var ordersInDateRange = _context.Orders
-                                            .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate);
+                                            .Where(o => o.OrderDate.Date >= startDate && o.OrderDate.Date <= endDate);
 
             // Tính toán các chỉ số
             ViewBag.TotalRevenue = await ordersInDateRange.SumAsync(o => o.TotalAmount);
