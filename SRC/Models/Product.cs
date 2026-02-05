@@ -24,6 +24,17 @@ namespace MaChiPhuShoe.Models
         [MaxLength(1000)]
         public string? ImageUrl { get; set; }
 
+        [Display(Name = "Kích thước")]
+        [MaxLength(50)]
+        public string? Size { get; set; }
+
+        [Display(Name = "Màu sắc")]
+        [MaxLength(50)]
+        public string? Color { get; set; }
+
+        [Display(Name = "Mô tả sản phẩm")]
+        public string? Description { get; set; }
+
         // --- THÔNG SỐ CHI TIẾT ---
         [Display(Name = "Tình trạng sản phẩm")]
         public string? ProductState { get; set; }

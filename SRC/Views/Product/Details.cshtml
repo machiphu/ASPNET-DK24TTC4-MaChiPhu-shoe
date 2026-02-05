@@ -10,7 +10,7 @@
             <img src="@Model.ImageUrl" class="img-fluid rounded" alt="@Model.Name">
         </div>
         <div class="col-lg-7">
-            <h3>[@Model.ProductState] @Model.Name</h3>
+            <h3><span class="text-success fw-bold">[@Model.ProductState]</span> @Model.Name</h3>
             <div class="d-flex align-items-baseline mt-3">
                 <span class="h2 text-danger fw-bold me-3">@Model.Price.ToString("N0") đ</span>
                 @if (Model.OldPrice.HasValue)
@@ -21,12 +21,9 @@
             <hr>
             <ul class="list-unstyled product-specs">
                 <li><i class="fas fa-check-circle text-success"></i><strong>Kho: </strong><span class="fw-bold text-success">@Model.StockStatus</span></li>
-                @* <li><i class="fas fa-microchip"></i><strong>Bộ vi xử lý: </strong> @Model.CpuDetail</li>
-                <li><i class="fas fa-memory"></i><strong>RAM: </strong> @Model.RamDetail</li>
-                <li><i class="fas fa-hdd"></i><strong>Bộ nhớ: </strong> @Model.StorageDetail</li>
-                <li><i class="fas fa-gamepad"></i><strong>Card đồ họa: </strong> @Model.GpuDetail</li>
-                <li><i class="fas fa-desktop"></i><strong>Màn hình: </strong> @Model.ScreenDetail</li>
-                <li><i class="fab fa-windows"></i><strong>Hệ điều hành: </strong> @Model.OperatingSystemDetail</li> *@
+                <li><i class="fa-solid fa-palette"></i><strong>Màu sắc: </strong> @Model.Color</li>
+                <li><i class="fa-solid fa-up-right-and-down-left-from-center"></i><strong>Kích thước: </strong> @Model.Size</li>
+                <li><i class="fa-solid fa-circle-info"></i><strong>Mô tả: </strong> @Model.Description</li>
                 <li><i class="fas fa-shield-alt"></i><strong>Bảo hành: </strong> @Model.Warranty</li>
             </ul>
             <div class="d-grid gap-2 mt-4">

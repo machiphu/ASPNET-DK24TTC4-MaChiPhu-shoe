@@ -13,18 +13,16 @@
             <p class="h4 text-danger fw-bold mb-3">@Model.Price.ToString("N0") đ</p>
 
             <ul class="list-unstyled mb-4">
-                @* <li><strong>CPU:</strong> @Model.Cpu</li>
-                <li><strong>RAM:</strong> @Model.Ram</li>
-                <li><strong>Ổ cứng:</strong> @Model.Storage</li>
-                <li><strong>Màn hình:</strong> @Model.Screen</li>
-                <li><strong>Bảo hành:</strong> @Model.Warranty</li> *@
+                <li><strong>Màu sắc:</strong> @Model.Color</li>
+                <li><strong>Kích thước:</strong> @Model.Size</li>
+                <li><strong>Mô tả:</strong> @Model.Description</li>
             </ul>
 
-            <a class="btn btn-primary me-2"
+            <a class="btn btn-danger me-2"
                asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@Model.Id">
                 <i class="fas fa-cart-plus me-1"></i> Thêm vào giỏ
             </a>
-            <a class="btn btn-outline-secondary" asp-controller="SanPham" asp-action="Index">Quay lại</a>
+            <a class="btn btn-outline-danger" asp-controller="SanPham" asp-action="Index">Quay lại</a>
         </div>
     </div>
 </div>
