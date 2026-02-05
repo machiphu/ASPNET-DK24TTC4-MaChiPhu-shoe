@@ -13,15 +13,19 @@
     <dl class="row">
         <dt class="col-sm-2">Tên</dt>
         <dd class="col-sm-10">@Model.Name</dd>
-        <dt class="col-sm-2">CPU</dt>
-        @* <dd class="col-sm-10">@Model.Cpu</dd> *@
+        <dt class="col-sm-2">Kích thước</dt>
+        <dd class="col-sm-10">@Model.Size</dd>
+        <dt class="col-sm-2">Màu sắc</dt>
+        <dd class="col-sm-10">@Model.Color</dd>
         <dt class="col-sm-2">Giá</dt>
         <dd class="col-sm-10">@Model.Price.ToString("N0") đ</dd>
+        <dt class="col-sm-2">Mô tả</dt>
+        <dd class="col-sm-10">@Model.Description</dd>
     </dl>
 
     <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Xóa" class="btn btn-danger" /> |
-        <a asp-action="Index">Hủy</a>
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-warning ms-1">Hủy</a>
     </form>
 </div>

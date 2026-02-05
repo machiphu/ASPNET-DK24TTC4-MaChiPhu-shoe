@@ -21,7 +21,7 @@
     </div>
     <div class="col-auto">
         <button class="btn btn-primary">Tìm</button>
-        <a asp-action="Index" class="btn btn-secondary">Xóa lọc</a>
+        <a asp-action="Index" class="btn btn-danger">Xóa lọc</a>
     </div>
 </form>
 
@@ -48,17 +48,17 @@
                 <td class="text-end">
                     <form asp-action="MakeAdmin" method="post" class="d-inline">
                         <input type="hidden" name="id" value="@u.Id" />
-                        <button class="btn btn-sm btn-outline-primary">Cấp Admin</button>
+                        <button class="btn btn-sm btn-success">Cấp Admin</button>
                     </form>
                     <form asp-action="RemoveAdmin" method="post" class="d-inline">
                         <input type="hidden" name="id" value="@u.Id" />
-                        <button class="btn btn-sm btn-outline-warning">Gỡ Admin</button>
+                        <button class="btn btn-sm btn-secondary">Gỡ Admin</button>
                     </form>
                     @if (u.LockoutEnd == null || u.LockoutEnd <= DateTimeOffset.UtcNow)
                     {
                         <form asp-action="Lock" method="post" class="d-inline">
                             <input type="hidden" name="id" value="@u.Id" />
-                            <button class="btn btn-sm btn-outline-danger">Khóa 7 ngày</button>
+                            <button class="btn btn-sm btn-warning">Khóa 7 ngày</button>
                         </form>
                     }
                     else

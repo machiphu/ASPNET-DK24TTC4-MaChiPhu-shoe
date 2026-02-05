@@ -9,10 +9,12 @@ namespace MaChiPhuShoe.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên sản phẩm.")]
+        [Display(Name = "Tên sản phẩm")]
         [MaxLength(255)]
         public string Name { get; set; } = default!;
 
         [Required(ErrorMessage = "Vui lòng nhập giá bán.")]
+        [Display(Name = "Giá bán")]
         [Column(TypeName = "decimal(18,0)")]
         public decimal Price { get; set; }
 
