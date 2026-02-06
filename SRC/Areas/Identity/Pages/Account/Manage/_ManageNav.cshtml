@@ -13,3 +13,16 @@
     <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
 </ul>
+
+@section Scripts {
+    <style>
+        .nav-link.active {
+            color: white !important;
+            background-color: #dc3545 !important;
+        }
+
+        .nav-link {
+            color: #dc3545 !important;
+        }
+    </style>
+}
